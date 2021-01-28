@@ -3,9 +3,10 @@ import {calcularTotal} from '../helpers.js';
 
 const Form = (props) => {
 
-    const {cantidad, guardarCantidad, plazo, guardarPlazo, guardarTotal} = props;
+    const {cantidad, guardarCantidad, plazo, guardarPlazo, guardarTotal,cargarSpinner} = props;
 
     const [error, verificarError] = useState(false);
+
 
     const enviarForm = (e) => {
     e.preventDefault();
@@ -17,10 +18,18 @@ const Form = (props) => {
     }
     //resetear error
     verificarError(false);
+    cargarSpinner(true);
 
-    //enviar cotizacion
-    const totalPagar = calcularTotal(cantidad, plazo);
-    guardarTotal(totalPagar);
+    setTimeout(() => {
+         //enviar cotizacion
+        const totalPagar = calcularTotal(cantidad, plazo);
+        guardarTotal(totalPagar);
+
+        cargarSpinner(false);
+        
+    }, 2000);
+
+   
 
     }
 

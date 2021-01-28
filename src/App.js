@@ -4,6 +4,8 @@ import Header from './Components/Header';
 import Form from './Components/Form';
 import Result from './Components/Result';
 import Messengers from './Components/Messengers';
+import Spinner from './Components/Spinner';
+
 
 
 
@@ -13,12 +15,16 @@ function App() {
   const [cantidad, guardarCantidad] = useState(0);
   const [plazo, guardarPlazo] = useState("");
   const [total, guardarTotal] = useState(0);
+  const [spinner, cargarSpinner] = useState(false);
+
 
 
 
   let componente;
 
-  if(total === 0){
+  if(spinner){
+    componente = <Spinner/>
+  }else if(total === 0){
     //console.log(total);
     componente = <Messengers/>
   }else{
@@ -41,6 +47,7 @@ function App() {
           guardarPlazo={guardarPlazo}
           total={total}
           guardarTotal={guardarTotal}
+          cargarSpinner={cargarSpinner}
           />
         <div className="mensajes">
           {componente}
